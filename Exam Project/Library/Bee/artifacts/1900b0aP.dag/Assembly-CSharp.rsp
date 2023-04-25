@@ -312,6 +312,7 @@
 -r:"Library/Bee/artifacts/1900b0aP.dag/UnityEngine.UI.ref.dll"
 "Assets/脚本/下一关.cs"
 "Assets/脚本/小球重力.cs"
+"Assets/脚本/开始游戏.cs"
 "Assets/脚本/死亡机制.cs"
 "Assets/脚本/玩家控制.cs"
 "Assets/脚本/结束游戏.cs"

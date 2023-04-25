@@ -357,13 +357,14 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
-"Assets/脚本/下一关.cs"
-"Assets/脚本/小球重力.cs"
-"Assets/脚本/死亡机制.cs"
-"Assets/脚本/玩家控制.cs"
-"Assets/脚本/结束游戏.cs"
-"Assets/脚本/计时器.cs"
-"Assets/脚本/重置按钮.cs"
+"Assets/Script/ballScript.cs"
+"Assets/Script/death.cs"
+"Assets/Script/endGame.cs"
+"Assets/Script/nextLevel.cs"
+"Assets/Script/playerControl.cs"
+"Assets/Script/restartButton.cs"
+"Assets/Script/startGame.cs"
+"Assets/Script/timer.cs"
 -langversion:9.0
 
 /deterministic

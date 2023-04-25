@@ -56,13 +56,14 @@
     <Analyzer Include="E:\Microsoft\VisualStudio\VisualStudioIDE\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\脚本\结束游戏.cs" />
-    <Compile Include="Assets\脚本\玩家控制.cs" />
-    <Compile Include="Assets\脚本\重置按钮.cs" />
-    <Compile Include="Assets\脚本\死亡机制.cs" />
-    <Compile Include="Assets\脚本\下一关.cs" />
-    <Compile Include="Assets\脚本\计时器.cs" />
-    <Compile Include="Assets\脚本\小球重力.cs" />
+    <Compile Include="Assets\Script\endGame.cs" />
+    <Compile Include="Assets\Script\startGame.cs" />
+    <Compile Include="Assets\Script\playerControl.cs" />
+    <Compile Include="Assets\Script\restartButton.cs" />
+    <Compile Include="Assets\Script\death.cs" />
+    <Compile Include="Assets\Script\nextLevel.cs" />
+    <Compile Include="Assets\Script\timer.cs" />
+    <Compile Include="Assets\Script\ballScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

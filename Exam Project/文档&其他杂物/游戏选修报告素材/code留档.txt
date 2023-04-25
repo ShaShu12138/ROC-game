@@ -1,0 +1,159 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class 玩家控制 : MonoBehaviour
+{
+    private Rigidbody playerRb;
+    int rotationX = 0;
+    int rotationY = 0;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        playerRb = GetComponent<Rigidbody>();
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        //纵向控制
+        //if (Input.GetKey(KeyCode.W) && (transform.eulerAngles.x == 0 ||(transform.eulerAngles.x > 0f && transform.eulerAngles.x < 30f) || (transform.eulerAngles.x < 360f && transform.eulerAngles.x > 330f)))
+        if (Input.GetKey(KeyCode.W) && (rotationX == 0 || (rotationX > 0f && rotationX < 30f)))
+        {
+            rotationX++;
+            playerRb.MoveRotation(Quaternion.AngleAxis(rotationX, transform.right));
+            //playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(new Vector3(60, 0, 0) * 1f * Time.deltaTime));
+            Debug.Log(rotationX);
+        }
+        //else if (Input.GetKey(KeyCode.S) && (transform.eulerAngles.x == 0 || (transform.eulerAngles.x < 360f && transform.eulerAngles.x > 330f) || (transform.eulerAngles.x > 0f && transform.eulerAngles.x < 30f)))
+        else if (Input.GetKey(KeyCode.S) && (rotationX == 0 || (rotationX < 0f && rotationX > -30f)))
+        {
+            //playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(new Vector3(60, 0, 0) * -1f * Time.deltaTime));
+            rotationX--;
+            playerRb.MoveRotation(Quaternion.AngleAxis(rotationX, transform.right));
+            Debug.Log("S");
+        }
+        else
+        {
+            if (transform.eulerAngles.x < 40 && transform.eulerAngles.x > 0 && !Input.GetKey(KeyCode.W))
+            {
+                //playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(new Vector3(50, 0, 0) * -0.7f * Time.deltaTime));
+                rotationX--;
+                playerRb.MoveRotation(Quaternion.AngleAxis(rotationX, transform.right));
+                Debug.Log("W回正");
+            }
+            if (transform.eulerAngles.x > 320 && transform.eulerAngles.x < 360 && !Input.GetKey(KeyCode.S))
+            {
+                //playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(new Vector3(50, 0, 0) * 0.7f * Time.deltaTime));
+                rotationX++;
+                playerRb.MoveRotation(Quaternion.AngleAxis(rotationX, transform.right));
+                Debug.Log("S回正");
+            }
+        }
+
+        //横向控制
+        if (Input.GetKey(KeyCode.A) && (transform.eulerAngles.z == 0 || (transform.eulerAngles.z > 0f && transform.eulerAngles.z < 30f) || (transform.eulerAngles.z < 360f && transform.eulerAngles.z > 330f)))
+        {
+            playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(new Vector3(0, 0, 60) * 1f * Time.deltaTime));
+            Debug.Log("A");
+        }
+        else if (Input.GetKey(KeyCode.D) && (transform.eulerAngles.z == 0 || (transform.eulerAngles.z < 360f && transform.eulerAngles.z > 330f) || (transform.eulerAngles.z > 0f && transform.eulerAngles.z < 30f)))
+        {
+            playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(new Vector3(0, 0, 60) * -1f * Time.deltaTime));
+            Debug.Log("D");
+        }
+        else
+        {
+            if (transform.eulerAngles.z < 40 && transform.eulerAngles.z > 2 && !Input.GetKey(KeyCode.A))
+            {
+                playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(new Vector3(0, 0, 50) * -0.7f * Time.deltaTime));
+                Debug.Log("A回正");
+            }
+            if (transform.eulerAngles.z > 320 && transform.eulerAngles.z < 358 && !Input.GetKey(KeyCode.D))
+            {
+                playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(new Vector3(0, 0, 50) * 0.7f * Time.deltaTime));
+                Debug.Log("D回正");
+            }
+        }
+
+        //左前和右前同时按下
+        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D)&& (transform.eulerAngles.x == 0 || (transform.eulerAngles.x > 0f && transform.eulerAngles.x < 30f) || (transform.eulerAngles.x < 360f && transform.eulerAngles.x > 330f)) && (transform.eulerAngles.z == 0 || (transform.eulerAngles.z < 360f && transform.eulerAngles.z > 330f) || (transform.eulerAngles.z > 0f && transform.eulerAngles.z < 30f)))
+        {
+            playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(new Vector3(60, 0, -60) * 1f * Time.deltaTime));
+            Debug.Log("WD");
+        }
+        else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A) && (transform.eulerAngles.x == 0 || (transform.eulerAngles.x > 0f && transform.eulerAngles.x < 30f) || (transform.eulerAngles.x < 360f && transform.eulerAngles.x > 330f)) && (transform.eulerAngles.z == 0 || (transform.eulerAngles.z > 0f && transform.eulerAngles.z < 30f) || (transform.eulerAngles.z < 360f && transform.eulerAngles.z > 330f)))
+        {
+            playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(new Vector3(60, 0, 60) * 1f * Time.deltaTime));
+            Debug.Log("WA");
+        }
+        else
+        {
+            if((transform.eulerAngles.x < 40 && transform.eulerAngles.x > 2 && !Input.GetKey(KeyCode.W)) && (transform.eulerAngles.z < 40 && transform.eulerAngles.z > 2 && !Input.GetKey(KeyCode.A)))
+            {
+                playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(new Vector3(-50, 0, -50) * 0.7f * Time.deltaTime));
+                Debug.Log("WA回正");
+            }
+            if ((transform.eulerAngles.x < 40 && transform.eulerAngles.x > 2 && !Input.GetKey(KeyCode.W)) && (transform.eulerAngles.z > 320 && transform.eulerAngles.z < 358 && !Input.GetKey(KeyCode.D)))
+            {
+                playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(new Vector3(-50, 0, 50) * 0.7f * Time.deltaTime));
+                Debug.Log("WD回正");
+            }
+        }
+
+        //左后和右后同时按下
+        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D)&& (transform.eulerAngles.x == 0 || (transform.eulerAngles.x < 360f && transform.eulerAngles.x > 330f) || (transform.eulerAngles.x > 0f && transform.eulerAngles.x < 30f)) && (transform.eulerAngles.z == 0 || (transform.eulerAngles.z < 360f && transform.eulerAngles.z > 330f) || (transform.eulerAngles.z > 0f && transform.eulerAngles.z < 30f)))
+        {
+            playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(new Vector3(-60, 0, -60) * 1f * Time.deltaTime));
+            Debug.Log("SD");
+        }
+        else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A) && (transform.eulerAngles.x == 0 || (transform.eulerAngles.x < 360f && transform.eulerAngles.x > 330f) || (transform.eulerAngles.x > 0f && transform.eulerAngles.x < 30f)) && (transform.eulerAngles.z == 0 || (transform.eulerAngles.z > 0f && transform.eulerAngles.z < 30f) || (transform.eulerAngles.z < 360f && transform.eulerAngles.z > 330f)))
+        {
+            playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(new Vector3(-60, 0, 60) * 1f * Time.deltaTime));
+            Debug.Log("SA");
+        }
+        else
+        {
+            if ((transform.eulerAngles.x > 320 && transform.eulerAngles.x < 358 && !Input.GetKey(KeyCode.S)) && (transform.eulerAngles.z > 320 && transform.eulerAngles.z < 358 && !Input.GetKey(KeyCode.D)))
+            {
+                playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(new Vector3(50, 0, 50) * 0.7f * Time.deltaTime));
+                Debug.Log("SD回正");
+            }
+            if ((transform.eulerAngles.x > 320 && transform.eulerAngles.x < 358 && !Input.GetKey(KeyCode.S)) && (transform.eulerAngles.z < 40 && transform.eulerAngles.z > 2 && !Input.GetKey(KeyCode.A)))
+            {
+                playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(new Vector3(50, 0, -50) * 0.7f * Time.deltaTime));
+                Debug.Log("SA回正");
+            }
+        }
+
+        //保持y轴旋转为0
+
+        //transform.localEulerAngles = new Vector3(transform.eulerAngles.x, 0.0f, transform.eulerAngles.z);
+        //playerRb.rotation = Quaternion.AngleAxis(45,transform.right);
+        //playerRb.MoveRotation(Quaternion.AngleAxis)
+        //playerRb.MoveRotation(Quaternion.Euler(playerRb.rotation.eulerAngles.x, 0f, playerRb.rotation.eulerAngles.z));
+
+        //if (transform.eulerAngles.y < 40 && transform.eulerAngles.y > 2)
+        //{
+        //    playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(new Vector3(0, 10, 0) * -0.7f * Time.deltaTime));
+        //}
+        //if (transform.eulerAngles.y > 320 && transform.eulerAngles.y < 358)
+        //{
+        //    playerRb.MoveRotation(playerRb.rotation * Quaternion.Euler(new Vector3(0, 10, 0) * 0.7f * Time.deltaTime));
+        //}
+
+        //if (transform.eulerAngles.y < 40 && transform.eulerAngles.y > 5)
+        //{
+        //    transform.localEulerAngles = new Vector3(transform.eulerAngles.x, 0.0f, transform.eulerAngles.z);
+        //}
+        //if (transform.eulerAngles.y > 320 && transform.eulerAngles.y < 355)
+        //{
+        //    transform.localEulerAngles = new Vector3(transform.eulerAngles.x, 0.0f, transform.eulerAngles.z);
+        //}
+
+        //Debug.Log(transform.eulerAngles.x + " " + transform.eulerAngles.z);
+    }
+}
+
+        
